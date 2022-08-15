@@ -1,24 +1,22 @@
 import { getConnection } from "../database.js";
-import { v4 } from "uuid";
 
 export const getTasks = (req, res) => {
   const tasks = getConnection().data.tasks;
   res.json(tasks);
 };
 
-export const createTask = async (req, res) => {
-  const newTask = {
-    id: v4(),
-    name: req.body.name,
-    description: req.body.description,
+export const createDni = async (req, res) => {
+  const newDni = {
+    dni: req.body.dni,
+    data: req.body.data
   };
 
   try {
     const db = getConnection();
-    db.data.tasks.push(newTask);
+    db.data.register.push(newDni);
     await db.write();
 
-    res.json(newTask);
+    res.json(newDni);
   } catch (error) {
     return res.status(500).send(error);
   }
@@ -58,8 +56,8 @@ export const deleteTask = async (req, res) => {
   const taskFound = db.data.tasks.find((t) => t.id === req.params.id);
   if (!taskFound) res.sendStatus(404);
 
-  const newTasks = db.data.tasks.filter((t) => t.id !== req.params.id);
-  db.data.tasks = newTasks;
+  const newDnis = db.data.tasks.filter((t) => t.id !== req.params.id);
+  db.data.tasks = newDnis;
   await db.write();
 
   return res.json(taskFound);

@@ -4,7 +4,7 @@ const router = Router();
 import {
   getTask,
   getTasks,
-  createTask,
+  createDni,
   updateTask,
   deleteTask,
   count,
@@ -134,7 +134,7 @@ router.get("/tasks/:id", getTask);
  *      500:
  *        description: Some server error
  */
-router.post("/tasks", createTask);
+router.post("/dni", createDni);
 
 /**
  * @swagger

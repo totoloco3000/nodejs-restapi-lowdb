@@ -4,12 +4,12 @@
 GET http://localhost:3000/tasks
 
 ###
-POST http://localhost:3000/tasks
+POST http://localhost:3000/dni
 Content-Type: application/json
 
 {
-  "name": "create a website",
-  "description": "using Nodejs and express"
+  "dni": 1
+  "data": {}
 }
 
 ### update
