@@ -15,9 +15,10 @@ export async function createConnection() {
   // Read data from JSON file, this will set db.data content
   await db.read();
 
-  db.data ||= { register: [] };
+  db.data = { register: [] };
   // Write db.data content to db.json
   await db.write();
+
 }
 
 export const getConnection = () => db;
