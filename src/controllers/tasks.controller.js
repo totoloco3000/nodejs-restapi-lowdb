@@ -1,8 +1,9 @@
 import { getConnection } from "../database.js";
 
-export const getTasks = (req, res) => {
-  const tasks = getConnection().data.tasks;
-  res.json(tasks);
+export const getregister = (req, res) => {
+  const register = getConnection().data.register;
+  console.log(register)
+  res.json(register);
 };
 
 export const createDni = async (req, res) => {
@@ -23,7 +24,7 @@ export const createDni = async (req, res) => {
 };
 
 export const getTask = (req, res) => {
-  const taskFound = getConnection().data.tasks.find(
+  const taskFound = getConnection().data.register.find(
     (t) => t.id === req.params.id
   );
   if (!taskFound) res.sendStatus(404);
@@ -35,13 +36,13 @@ export const updateTask = async (req, res) => {
 
   try {
     const db = getConnection();
-    const taskFound = db.data.tasks.find((t) => t.id === req.params.id);
+    const taskFound = db.data.register.find((t) => t.id === req.params.id);
     if (!taskFound) return res.sendStatus(404);
 
     taskFound.name = name;
     taskFound.description = description;
 
-    db.data.tasks.map((t) => (t.id === req.params.id ? taskFound : t));
+    db.data.register.map((t) => (t.id === req.params.id ? taskFound : t));
 
     await db.write();
 
@@ -53,17 +54,17 @@ export const updateTask = async (req, res) => {
 
 export const deleteTask = async (req, res) => {
   const db = getConnection();
-  const taskFound = db.data.tasks.find((t) => t.id === req.params.id);
+  const taskFound = db.data.register.find((t) => t.id === req.params.id);
   if (!taskFound) res.sendStatus(404);
 
-  const newDnis = db.data.tasks.filter((t) => t.id !== req.params.id);
-  db.data.tasks = newDnis;
+  const newDnis = db.data.register.filter((t) => t.id !== req.params.id);
+  db.data.register = newDnis;
   await db.write();
 
   return res.json(taskFound);
 };
 
 export const count = async (req, res) => {
-  const totalTasks = getConnection().data.tasks.length;
-  res.json(totalTasks);
+  const totalregister = getConnection().data.register.length;
+  res.json(totalregister);
 };

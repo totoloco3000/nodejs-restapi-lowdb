@@ -3,7 +3,7 @@ const router = Router();
 
 import {
   getTask,
-  getTasks,
+  getregister,
   createDni,
   updateTask,
   deleteTask,
@@ -67,7 +67,7 @@ import {
  *               $ref: '#/components/schemas/Task'
  */
 
-router.get("/tasks", getTasks);
+router.get("/tasks", getregister);
 
 /**
  * @swagger
